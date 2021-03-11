@@ -23,6 +23,14 @@
     <rosparam param="simulated_power_line_currents">[50.0]</rosparam>
   </node>
 
+  <node name="power_line_simulation2" pkg="power_line_simulation" type="power_line_simulation" output="screen">
+    <param name="magnetometer_frame" type="str" value="/magnetometer2" />
+    <param name="magnetometer_topic" type="str" value="/imu_magnetic2" />
+    <rosparam param="simulated_power_line_frames">[power_line_ground_truth]</rosparam>
+    <rosparam param="simulated_power_line_currents">[50.0]</rosparam>
+  </node>
+
+
   <node pkg="tf" type="static_transform_publisher" name="wire_position1" args="$(arg power_line_x) $(arg power_line_y) 0.8 0 0 1.5708 /base_link /power_line_ground_truth 1000"/> 
 
     <node name="spawn_robot" ns="powerline" pkg="gazebo_ros" type="spawn_model" args="-file $(find power_line_simulation)/urdf/powerline.urdf.xacro -urdf -model powerline -x $(arg power_line_x) -y $(arg power_line_y) -z 0.5 -Y $(arg power_line_yaw)" respawn="false" output="screen" />
